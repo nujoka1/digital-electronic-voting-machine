@@ -6,9 +6,9 @@ Academic offline Arduino Mega 2560 prototype. Not INEC-certified, election-ready
 
 ## Current status
 
-The canonical Arduino firmware compiles for Mega (9286 bytes flash; 398 bytes static RAM). Actual-sketch host tests pass for voting, cancellation, duplicate rejection, input handling, restart, final closure, persistent lockout and storage faults. See `docs/verification-matrix.md` for test boundaries and retained evidence.
+The canonical Arduino firmware compiles for Mega (9370 bytes flash; 398 bytes static RAM). Actual-sketch host tests pass for voting, cancellation, duplicate rejection, input handling, restart, final closure, persistent lockout and storage faults. See `docs/verification-matrix.md` for test boundaries and retained evidence.
 
-Proteus circuit construction/acceptance testing, physical timing, MATLAB execution, independent-model parity, rendered diagrams and final DOCX/PDF/PPTX deliverables remain pending. The source ZIP is a development snapshot, not a completed submission.
+Proteus circuit construction/acceptance testing, physical timing, MATLAB execution, independent-model parity, rendered diagrams and final DOCX/PDF/PPTX deliverables remain pending. The MATLAB reference model now follows the firmware's open, final-closed, accreditation, PIN-lockout and results rules, but still requires execution in MATLAB or GNU Octave. The source ZIP is a development snapshot, not a completed submission.
 
 ## Build and test
 
@@ -24,7 +24,7 @@ The script uses a temporary build directory and writes evidence to `evidence/`. 
 
 ## Workflow
 
-Open Poll → `5580#` → voter ID `1001`–`1010` followed by `#` → biometric toggle LOW then `#` → release inputs and select one candidate → fresh Confirm press. Cancel abandons a ballot. `*` clears ID/PIN input. Close Poll from voter entry → `5580#` → permanent final results. No network or real biometric recognition is used.
+Open Poll → press the physical Open button → enter `5580#` → voter ID `1001`–`1010` followed by `#` → biometric toggle LOW then `#` → release inputs and select one candidate → fresh Confirm press. During officer authentication, the LCD displays the entered PIN digits for verification; `*` clears the entry. Cancel abandons a ballot. Close Poll from voter entry → `5580#` → permanent final results. No network or real biometric recognition is used.
 
 Poll phase, accreditation, votes, failed PIN attempts and lockout survive restart. Three invalid PINs or Tamper lock persistently. Corrupt/older/incompletely written EEPROM is preserved and locks; only truly erased storage initializes a new election. There is no automatic erase/reset command. See `docs/firmware-review.md` and `proteus/PROTEUS_WIRING.md` before simulation.
 
@@ -32,10 +32,10 @@ Poll phase, accreditation, votes, failed PIN attempts and lockout survive restar
 
 - `arduino/`: canonical firmware; `firmware/`: PlatformIO wrapper.
 - `tests/host/`: actual-sketch harness; `scripts/validate.py`: reproducible checks.
-- `matlab/`: existing independent models, still needing revised-firmware parity work.
+- `matlab/`: independent reference model and tests aligned with firmware poll phases and lockout rules; execution remains environment-dependent.
 - `design/`: pin map, Boolean logic and diagram sources.
-- `proteus/`: wiring checkpoint and compiled HEX; no fabricated schematic files.
-- `docs/`, `presentation/`: traceability/review and pending office deliverables.
+- `proteus/`: usage guide, wiring checkpoint and compiled HEX; no fabricated schematic files.
+- `docs/`, `presentation/`: traceability, supervisor demonstration guide and pending office deliverables.
 - `evidence/`: genuine executed-check outputs and source fingerprints.
 
 Fauzeeya, Nuhu, Rabiu and Farida should preserve existing changes, work on focused branches, run the relevant validation command and review evidence before merging. Keep pin map and wiring instructions consistent. Do not label simulated host tests as Proteus execution. No commits, pushes or deployments are performed by the validation script.

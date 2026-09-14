@@ -1,5 +1,5 @@
-UTC: 2026-09-14T05:55:16.215956+00:00
-$ /tmp/voting-validation-ynvcvack/test
+UTC: 2026-09-14T06:06:22.548379+00:00
+$ /tmp/voting-validation-6l7ia0o9/test
 PASS workflow, cancellation, duplicate, restart, final closure, audit privacy
 PASS PIN persistence and tamper across states/restart
 PASS bounce, simultaneous selection, fresh confirmation, timeout

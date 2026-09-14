@@ -1,4 +1,4 @@
-UTC: 2026-09-14T05:55:16.149570+00:00
-$ g++ -std=c++17 -Wall -Wextra -Werror -fsanitize=address,undefined -I tests/host tests/host/test_firmware.cpp -o /tmp/voting-validation-ynvcvack/test
+UTC: 2026-09-14T06:06:22.419801+00:00
+$ g++ -std=c++17 -Wall -Wextra -Werror -fsanitize=address,undefined -I tests/host tests/host/test_firmware.cpp -o /tmp/voting-validation-6l7ia0o9/test
 
 Exit: 0

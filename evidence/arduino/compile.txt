@@ -1,0 +1,6 @@
+UTC: 2026-09-14T05:56:10.462332+00:00
+$ arduino-cli compile --fqbn arduino:avr:mega:cpu=atmega2560 --build-path /tmp/voting-validation-if2qlq8x/mega --output-dir /home/nujoka/Documents/Project-Store/500l_projects/digital-electronic-voting-machine/build/arduino arduino/DigitalVotingMachine
+Sketch uses 9370 bytes (3%) of program storage space. Maximum is 253952 bytes.
+Global variables use 398 bytes (4%) of dynamic memory, leaving 7794 bytes for local variables. Maximum is 8192 bytes.
+
+Exit: 0

@@ -1,0 +1,35 @@
+stateDiagram-v2
+  [*] --> BOOT
+  BOOT --> POLL_CLOSED: blank EEPROM initialized / never opened
+  BOOT --> VOTER_IDENTIFICATION: valid persisted OPEN
+  BOOT --> RESULTS: valid persisted FINAL_CLOSED
+  BOOT --> TAMPER_LOCKOUT: persisted lock / corrupt or incomplete storage / tamper
+  POLL_CLOSED --> OFFICER_AUTHENTICATION: Open button
+  POLL_CLOSED --> POLL_CLOSED: voter input rejected
+  OFFICER_AUTHENTICATION --> VOTER_IDENTIFICATION: valid open PIN / persist OPEN
+  OFFICER_AUTHENTICATION --> RESULTS: valid close PIN / persist FINAL_CLOSED
+  OFFICER_AUTHENTICATION --> OFFICER_AUTHENTICATION: wrong PIN / persist attempt 1 or 2
+  OFFICER_AUTHENTICATION --> TAMPER_LOCKOUT: third wrong PIN / persist lock
+  OFFICER_AUTHENTICATION --> POLL_CLOSED: opening cancelled or timed out
+  OFFICER_AUTHENTICATION --> VOTER_IDENTIFICATION: closing cancelled or timed out
+  VOTER_IDENTIFICATION --> OFFICER_AUTHENTICATION: Close button
+  VOTER_IDENTIFICATION --> BIOMETRIC_VERIFICATION: registered and not voted
+  VOTER_IDENTIFICATION --> VOTER_IDENTIFICATION: unknown / duplicate / cancel / entry timeout
+  BIOMETRIC_VERIFICATION --> BALLOT_ENABLED: match + hash key / persist accreditation
+  BIOMETRIC_VERIFICATION --> VOTER_IDENTIFICATION: mismatch / cancel / timeout
+  BALLOT_ENABLED --> CONFIRMATION: released inputs then exactly one debounced selection
+  BALLOT_ENABLED --> BALLOT_ENABLED: multiple inputs / clear selection / require release
+  BALLOT_ENABLED --> VOTER_IDENTIFICATION: cancel / timeout
+  CONFIRMATION --> CONFIRMATION: fresh single selection replaces previous selection
+  CONFIRMATION --> BALLOT_ENABLED: multiple inputs invalidate selection
+  CONFIRMATION --> VOTER_IDENTIFICATION: fresh Confirm / guards / persist vote
+  CONFIRMATION --> VOTER_IDENTIFICATION: cancel / timeout
+  RESULTS --> RESULTS: display final totals / ignore voting and opening
+  POLL_CLOSED --> TAMPER_LOCKOUT: tamper
+  OFFICER_AUTHENTICATION --> TAMPER_LOCKOUT: tamper / storage fault
+  VOTER_IDENTIFICATION --> TAMPER_LOCKOUT: tamper
+  BIOMETRIC_VERIFICATION --> TAMPER_LOCKOUT: tamper / storage fault
+  BALLOT_ENABLED --> TAMPER_LOCKOUT: tamper
+  CONFIRMATION --> TAMPER_LOCKOUT: tamper / storage fault
+  RESULTS --> TAMPER_LOCKOUT: tamper
+  TAMPER_LOCKOUT --> TAMPER_LOCKOUT: no user recovery / restart preserves lock

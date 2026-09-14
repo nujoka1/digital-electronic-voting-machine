@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Arduino Mega",
+      "type": "shell",
+      "command": "python3 scripts/validate.py --mega",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Test actual firmware on host",
+      "type": "shell",
+      "command": "python3 scripts/validate.py --host",
+      "problemMatcher": []
+    },
+    {
+      "label": "Validate firmware and export HEX",
+      "type": "shell",
+      "command": "python3 scripts/validate.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run reference model tests",
+      "type": "shell",
+      "command": "python3 tests/reference_model_smoke.py && python3 tests/test_requirements.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run MATLAB tests",
+      "type": "shell",
+      "command": "cd matlab && matlab -batch run_tests",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run MATLAB demo",
+      "type": "shell",
+      "command": "cd matlab && matlab -batch run_demo",
+      "problemMatcher": []
+    },
+    {
+      "label": "Check evidence",
+      "type": "shell",
+      "command": "find evidence -type f -print | sort",
+      "problemMatcher": []
+    },
+    {
+      "label": "Package source",
+      "type": "shell",
+      "command": "python3 scripts/package_source.py",
+      "problemMatcher": []
+    }
+  ]
+}

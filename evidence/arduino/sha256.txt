@@ -1,0 +1,1 @@
+de2a8c1b78369301de7048d2a1b03777b23c2fff6d3c267d1d284d848340b267  evidence/arduino/DigitalVotingMachine.ino.hex

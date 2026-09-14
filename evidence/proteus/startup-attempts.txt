@@ -1,0 +1,32 @@
+Proteus startup investigation: 2026-09-13/14, Africa/Lagos
+
+Installed application: Proteus 8 Professional v8.13 SP0 (read from authentic splash screen).
+Executable: ~/.wine/drive_c/Program Files (x86)/Labcenter Electronics/Proteus 8 Professional/BIN/PDS.EXE
+Desktop launcher: wine-stable, WINEPREFIX=~/.wine, working directory BIN.
+/usr/bin/wine resolves to /usr/bin/wine-stable.
+
+Attempt 1: env WINEPREFIX=/home/nujoka/.wine WINEDEBUG=-all wine <absolute PDS.EXE path>
+Exited 1. Retained tool output:
+QEventDispatcher: Failed to create QEventDispatcherWin32 internal window: 1400
+QWidget::create: Failed to create window (Invalid window handle.)
+(The QWidget error repeated five times.)
+QEventDispatcher: Failed to create QEventDispatcherWin32 internal window: 1400
+
+Attempt 2: env WINEPREFIX=/home/nujoka/.wine WINEDEBUG=fixme-all wine-stable PDS.EXE
+Working directory: installed BIN directory.
+Reached authentic splash screen; screenshot startup-splash.png.
+Observed startup service errors:
+003c:err:service:process_send_start_message service L"clr_optimization_v4.0.30319_64" failed to start
+003c:err:service:process_send_start_message service L"clr_optimization_v4.0.30319_32" failed to start
+MESA-INTEL: warning: Ivy Bridge Vulkan support is incomplete
+No schematic editor appeared during observation. Stopped only this launched PDS process with SIGTERM to test a virtual-desktop workaround. Exit 143.
+
+Attempt 3: env WINEPREFIX=/home/nujoka/.wine WINEDEBUG=fixme-all wine-stable explorer /desktop=VotingCircuit,1366x768 PDS.EXE
+Working directory: installed BIN directory.
+Reached Proteus Home Page and New Project Wizard. User subsequently completed the wizard and opened Schematic Capture / Pick Devices. Window list verified those titles. No simulation has run and no project file is present in the workspace yet. Host keyboard text entry was unreliable; an attempted Windows-side helper was stopped before it produced a response. The project title contains a malformed path from the earlier input attempt and needs a verified Save As.
+
+Genuine supplied component clip found:
+DATA/Snippets/Arduino/Arduino Mega 2560.pdsclip
+Native ZIP entries: BINDINGS.DAT, DESIGN.SEC, THUMB.BMP.
+Installed ISIS help documents File > Insert Project Clip for reusing schematic clips.
+The splash screenshot is application-startup evidence only, not circuit or simulation evidence.

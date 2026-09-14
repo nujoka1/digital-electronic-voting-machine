@@ -1,0 +1,11 @@
+UTC: 2026-09-14T05:55:16.215956+00:00
+$ /tmp/voting-validation-ynvcvack/test
+PASS workflow, cancellation, duplicate, restart, final closure, audit privacy
+PASS PIN persistence and tamper across states/restart
+PASS bounce, simultaneous selection, fresh confirmation, timeout
+PASS entry limits, stage timeouts, held inputs and authentication cancellation
+PASS ten-voter election and count invariants
+Power-cut boundaries checked: 8; corrupt record bytes checked: 17
+PASS EEPROM interruptions, corruption, legacy preservation
+
+Exit: 0

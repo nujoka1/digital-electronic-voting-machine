@@ -1,0 +1,11 @@
+flowchart LR
+  V[Voter] --> K[4x4 keypad]
+  O[Presiding officer] --> I[Open / close / tamper inputs]
+  K --> C[Arduino Mega 2560\nfinite-state controller]
+  I --> C
+  B[Biometric match toggle] --> C
+  C --> L[20x4 LCD\nstatus and final results]
+  C --> A[Candidate buttons A-D]
+  C --> E[LEDs and buzzer]
+  C --> T[Serial1 audit terminal]
+  C <--> M[Internal EEPROM\ncounts and voter flags + CRC]
